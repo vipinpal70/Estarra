@@ -5,35 +5,101 @@ import photo7 from "@assets/photo-7_1754162009581.jpg";
 import photo8 from "@assets/photo-8_1754162009582.jpg";
 import photo9 from "@assets/photo-9_1754162009583.jpg";
 import photo17 from "@assets/photo17_1754162198728.jpg";
+import photo12 from "@assets/photo-12_1754162198723.jpg";
+import photo13 from "@assets/photo-13_1754162198724.jpg";
+import photo14 from "@assets/photo-14_1754162198725.jpg";
+import photo15 from "@assets/photo-15_1754162198726.jpg";
+import photo16 from "@assets/photo-16_1754162198727.jpg";
+import photo17alt from "@assets/photo-17_1754162198728.jpg";
+import photo18 from "@assets/photo-18_1754162198729.jpg";
+import photo19 from "@assets/photo-19_1754162198730.jpg";
+import photo20 from "@assets/photo-20_1754162198732.jpg";
+import photo21 from "@assets/photo-21_1754162198732.jpg";
 
 const portfolioItems = [
   {
     id: 1,
-    image: photo7,
-    title: "Modern House Exterior",
-    description: "Contemporary design with LED lighting",
+    image: photo12,
+    title: "Modern House Exterior Night View",
+    description: "Contemporary design with blue LED lighting and balcony",
     category: "exterior"
   },
   {
     id: 2,
-    image: photo8,
-    title: "House Exterior Night View",
-    description: "Dramatic LED lighting showcase",
-    category: "exterior"
+    image: photo13,
+    title: "Interior Entrance Hall",
+    description: "Decorative door design with marble flooring",
+    category: "interior"
   },
   {
     id: 3,
-    image: photo9,
-    title: "Kitchen Design",
-    description: "Arched entrance with modern finishes",
-    category: "interior"
+    image: photo14,
+    title: "Geometric Ceiling Design",
+    description: "Modern red ceiling pattern with contemporary finish",
+    category: "ceiling"
   },
   {
     id: 4,
-    image: photo17,
-    title: "Glass Staircase",
-    description: "Modern stainless steel and glass design",
+    image: photo15,
+    title: "Modern Corridor Design",
+    description: "Sleek hallway with black ceiling accent",
     category: "interior"
+  },
+  {
+    id: 5,
+    image: photo16,
+    title: "Accent Wall Design",
+    description: "Bold red feature wall with modern window treatment",
+    category: "interior"
+  },
+  {
+    id: 6,
+    image: photo17,
+    title: "Luxury Marble Staircase",
+    description: "Premium granite and marble steps with pattern design",
+    category: "staircase"
+  },
+  {
+    id: 7,
+    image: photo17alt,
+    title: "Stainless Steel Railing",
+    description: "Modern staircase with steel railings and marble finish",
+    category: "staircase"
+  },
+  {
+    id: 8,
+    image: photo18,
+    title: "Designer Bathroom Tiles",
+    description: "Contemporary patterned wall tiles with modern finish",
+    category: "bathroom"
+  },
+  {
+    id: 9,
+    image: photo19,
+    title: "Decorative Ceiling Panel",
+    description: "Orange accent ceiling with recessed lighting",
+    category: "ceiling"
+  },
+  {
+    id: 10,
+    image: photo20,
+    title: "Geometric Wall Pattern",
+    description: "Designer wall tiles with contemporary geometric design",
+    category: "interior"
+  },
+  {
+    id: 11,
+    image: photo21,
+    title: "Entrance Door Design",
+    description: "Carved wooden door with granite flooring pattern",
+    category: "entrance"
+  },
+  {
+    id: 12,
+    image: photo7,
+    title: "Evening House Exterior",
+    description: "Multi-story design with dramatic lighting",
+    category: "exterior"
   }
 ];
 
