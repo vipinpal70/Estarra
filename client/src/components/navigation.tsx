@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import homeIcon from "@assets/photo-12_1754162198723.jpg";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,10 +42,11 @@ export default function Navigation() {
             <div className="hidden md:flex space-x-8">
               <button 
                 onClick={() => scrollToSection('home')}
-                className="text-white hover:text-construction-orange transition-colors duration-300"
+                className="flex items-center space-x-2 text-white hover:text-construction-orange transition-colors duration-300"
                 data-testid="nav-home"
               >
-                Home
+                <img src={homeIcon} alt="Home" className="w-6 h-6 rounded-full object-cover" />
+                <span>Home</span>
               </button>
               <button 
                 onClick={() => scrollToSection('about')}
@@ -105,10 +107,11 @@ export default function Navigation() {
         <div className="flex flex-col items-center justify-center h-full space-y-8">
           <button 
             onClick={() => scrollToSection('home')}
-            className="text-white text-xl hover:text-construction-orange transition-colors duration-300"
+            className="flex items-center space-x-2 text-white text-xl hover:text-construction-orange transition-colors duration-300"
             data-testid="mobile-nav-home"
           >
-            Home
+            <img src={homeIcon} alt="Home" className="w-6 h-6 rounded-full object-cover" />
+            <span>Home</span>
           </button>
           <button 
             onClick={() => scrollToSection('about')}

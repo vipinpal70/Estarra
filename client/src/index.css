@@ -109,7 +109,7 @@
   }
   
   .hero-bg {
-    background: linear-gradient(135deg, hsl(0, 0%, 10%) 0%, hsl(210, 9%, 25%) 100%);
+    background: linear-gradient(135deg, hsl(0, 0%, 5%) 0%, hsl(210, 9%, 15%) 100%);
   }
   
   .construction-pattern {
@@ -118,7 +118,7 @@
   
   .glass-effect {
     backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
