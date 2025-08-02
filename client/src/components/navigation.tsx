@@ -68,6 +68,13 @@ export default function Navigation() {
                 Portfolio
               </button>
               <button 
+                onClick={() => scrollToSection('gallery')}
+                className="text-white hover:text-construction-orange transition-colors duration-300"
+                data-testid="nav-gallery"
+              >
+                Gallery
+              </button>
+              <button 
                 onClick={() => scrollToSection('contact')}
                 className="text-white hover:text-construction-orange transition-colors duration-300"
                 data-testid="nav-contact"
@@ -123,6 +130,13 @@ export default function Navigation() {
             data-testid="mobile-nav-portfolio"
           >
             Portfolio
+          </button>
+          <button 
+            onClick={() => scrollToSection('gallery')}
+            className="text-white text-xl hover:text-construction-orange transition-colors duration-300"
+            data-testid="mobile-nav-gallery"
+          >
+            Gallery
           </button>
           <button 
             onClick={() => scrollToSection('contact')}

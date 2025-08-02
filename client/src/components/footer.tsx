@@ -48,8 +48,8 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li><button onClick={() => scrollToSection('about')} className="hover:text-construction-orange transition-colors duration-300">About Us</button></li>
               <li><button onClick={() => scrollToSection('portfolio')} className="hover:text-construction-orange transition-colors duration-300">Portfolio</button></li>
+              <li><button onClick={() => scrollToSection('gallery')} className="hover:text-construction-orange transition-colors duration-300">Gallery</button></li>
               <li><button onClick={() => scrollToSection('contact')} className="hover:text-construction-orange transition-colors duration-300">Contact</button></li>
-              <li><button className="hover:text-construction-orange transition-colors duration-300">Blog</button></li>
             </ul>
           </div>
           

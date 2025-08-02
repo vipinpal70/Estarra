@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a modern construction company website for Estarra, built as a full-stack React application with Express.js backend. The project creates a premium, animated construction company website featuring responsive design, contact forms with email integration, and a portfolio showcase. The application uses modern web technologies including React with TypeScript, shadcn/ui components, Tailwind CSS, and GSAP animations to deliver a professional construction company web presence.
+This is a modern construction company website for Estarra, built as a full-stack React application with Express.js backend. The project creates a premium, animated construction company website featuring responsive design, contact forms with email integration, portfolio showcase, and detailed project gallery. The application uses modern web technologies including React with TypeScript, shadcn/ui components, Tailwind CSS, and GSAP animations to deliver a professional construction company web presence.
 
 ## User Preferences
 
@@ -43,7 +43,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Component Structure
 - **Page Components**: Single-page application with home page and 404 handler
-- **Section Components**: Modular sections (Hero, About, Services, Portfolio, Contact, Footer)
+- **Section Components**: Modular sections (Hero, About, Services, Portfolio, Gallery, Contact, Footer)
 - **UI Components**: Comprehensive shadcn/ui component library integration
 - **Responsive Design**: Mobile-first approach with responsive breakpoints
 
@@ -51,6 +51,7 @@ Preferred communication style: Simple, everyday language.
 - **Scroll Animations**: GSAP ScrollTrigger for reveal animations on scroll
 - **Hero Animations**: Staggered text animations for engaging first impression
 - **Interactive Elements**: Hover effects, button animations, and smooth transitions
+- **Gallery Features**: Lightbox functionality with image zoom and category tags
 - **Performance**: Lazy loading of animation libraries to optimize initial page load
 
 ## External Dependencies
