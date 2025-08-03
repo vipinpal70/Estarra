@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import photo1 from "@assets/photo1_1754162009575.jpg";
+import photo1 from "@assets/about-main.jpg";
 
 export default function AboutSection() {
   return (
@@ -20,7 +20,7 @@ export default function AboutSection() {
             <img 
               src={photo1} 
               alt="Interior room with custom design and decorative ceiling" 
-              className="rounded-xl shadow-lg w-full h-auto"
+              className="rounded-xl shadow-lg w-full h-[90vh]"
               data-testid="about-image"
             />
           </div>
@@ -33,7 +33,7 @@ export default function AboutSection() {
             </p>
             
             <div className="grid grid-cols-2 gap-6 mb-8">
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="150">
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="50+">
                 <div 
                   className="text-3xl font-bold text-construction-orange mb-2" 
                   data-counter-display
@@ -43,7 +43,7 @@ export default function AboutSection() {
                 </div>
                 <div className="text-sm text-gray-600">Projects Completed</div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="15">
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="5+">
                 <div 
                   className="text-3xl font-bold text-construction-orange mb-2" 
                   data-counter-display
@@ -53,7 +53,7 @@ export default function AboutSection() {
                 </div>
                 <div className="text-sm text-gray-600">Years Experience</div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="98">
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="98+">
                 <div 
                   className="text-3xl font-bold text-construction-orange mb-2" 
                   data-counter-display
@@ -63,7 +63,7 @@ export default function AboutSection() {
                 </div>
                 <div className="text-sm text-gray-600">Client Satisfaction %</div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="25">
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm" data-counter data-target="15+">
                 <div 
                   className="text-3xl font-bold text-construction-orange mb-2" 
                   data-counter-display

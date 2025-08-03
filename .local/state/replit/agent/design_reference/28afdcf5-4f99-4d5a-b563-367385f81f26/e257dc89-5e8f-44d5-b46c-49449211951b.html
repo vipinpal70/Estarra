@@ -1,0 +1,876 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estarra Construction - Premium Construction & Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'construction-orange': '#ff6b35',
+                        'construction-blue': '#007bff',
+                        'dark-charcoal': '#1a1a1a',
+                        'light-gray': '#f8f9fa',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #1a1a1a 0%, #343a40 100%);
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent 0%, #ff6b35 50%, transparent 100%);
+            height: 2px;
+        }
+        .construction-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b35' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .lightbox-close:hover {
+            color: #ff6b35;
+        }
+    </style>
+</head>
+<body class="font-inter text-gray-800 bg-white">
+
+    <!-- Navigation -->
+    <!-- @COMPONENT: Navigation [sticky header with smooth scroll] -->
+    <nav class="fixed top-0 w-full z-50 glass-effect" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-poppins font-bold text-white">
+                    <span class="text-construction-orange">E</span>starra
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-construction-orange transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-white hover:text-construction-orange transition-colors duration-300">About</a>
+                    <a href="#services" class="text-white hover:text-construction-orange transition-colors duration-300">Services</a>
+                    <a href="#portfolio" class="text-white hover:text-construction-orange transition-colors duration-300">Portfolio</a>
+                    <a href="#contact" class="text-white hover:text-construction-orange transition-colors duration-300">Contact</a>
+                </div>
+                <button class="md:hidden text-white" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 z-40 bg-dark-charcoal transform translate-x-full transition-transform duration-300 md:hidden" id="mobile-menu">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#home" class="text-white text-xl hover:text-construction-orange mobile-nav-link">Home</a>
+            <a href="#about" class="text-white text-xl hover:text-construction-orange mobile-nav-link">About</a>
+            <a href="#services" class="text-white text-xl hover:text-construction-orange mobile-nav-link">Services</a>
+            <a href="#portfolio" class="text-white text-xl hover:text-construction-orange mobile-nav-link">Portfolio</a>
+            <a href="#contact" class="text-white text-xl hover:text-construction-orange mobile-nav-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <!-- @COMPONENT: HeroSection [animated construction elements] -->
+    <section id="home" class="min-h-screen hero-bg construction-pattern flex items-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="text-5xl lg:text-6xl font-poppins font-bold mb-6 leading-tight" id="hero-title">
+                        Building Your <span class="text-construction-orange">Dreams</span> Into Reality
+                    </h1>
+                    <p class="text-xl mb-8 opacity-90" id="hero-subtitle">
+                        Premium construction and design services that transform visions into exceptional living spaces. Quality craftsmanship, innovative design, modern solutions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-construction-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105" data-scroll-to="portfolio">
+                            View Our Work
+                        </button>
+                        <button class="border-2 border-white text-white hover:bg-white hover:text-dark-charcoal px-8 py-4 rounded-lg font-semibold transition-all duration-300" data-scroll-to="contact">
+                            Get Quote
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- Modern house exterior with LED lighting from uploaded photos -->
+                    <div class="construction-blueprint" id="blueprint-animation">
+                        <i class="fas fa-home text-9xl text-construction-orange opacity-20 animate-float"></i>
+                        <div class="absolute top-4 left-4 w-4 h-4 bg-construction-blue rounded-full animate-ping"></div>
+                        <div class="absolute bottom-8 right-8 w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated Elements -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- About Section -->
+    <!-- @COMPONENT: AboutSection [company overview with stats] -->
+    <section id="about" class="py-20 bg-light-gray">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-poppins font-bold mb-4 text-dark-charcoal">About <span class="text-construction-orange">Estarra</span></h2>
+                <div class="section-divider w-24 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    With years of expertise in premium construction and innovative design, Estarra transforms residential and commercial spaces into architectural masterpieces.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <!-- Interior room with pink walls and decorative ceiling -->
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRjhGOUZBIi8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjUwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNGRkY1RjUiIHN0cm9rZT0iI0U1RTdFQiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjMwMCIgY3k9IjIwMCIgcj0iNDAiIGZpbGw9IiNGRjZCMzUiIG9wYWNpdHk9IjAuMyIvPgo8dGV4dCB4PSIzMDAiIHk9IjIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzY2NzI4MCIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9IkludGVyIj5Db25zdHJ1Y3Rpb24gUGhvdG88L3RleHQ+Cjwvc3ZnPgo=" alt="Estarra construction project interior" class="rounded-xl shadow-lg w-full h-auto" data-aos="fade-right" />
+                </div>
+                <div>
+                    <h3 class="text-3xl font-poppins font-bold mb-6 text-dark-charcoal">Crafting Excellence Since Day One</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Our commitment to quality and innovation drives every project we undertake. From modern residential homes to sophisticated commercial spaces, we deliver exceptional results that exceed expectations.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="text-center p-4 bg-white rounded-lg shadow-sm" data-counter="150">
+                            <div class="text-3xl font-bold text-construction-orange mb-2" data-target="150">0</div>
+                            <div class="text-sm text-gray-600">Projects Completed</div>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-lg shadow-sm" data-counter="15">
+                            <div class="text-3xl font-bold text-construction-orange mb-2" data-target="15">0</div>
+                            <div class="text-sm text-gray-600">Years Experience</div>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-lg shadow-sm" data-counter="98">
+                            <div class="text-3xl font-bold text-construction-orange mb-2" data-target="98">0</div>
+                            <div class="text-sm text-gray-600">Client Satisfaction %</div>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-lg shadow-sm" data-counter="25">
+                            <div class="text-3xl font-bold text-construction-orange mb-2" data-target="25">0</div>
+                            <div class="text-sm text-gray-600">Expert Team</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AboutSection -->
+
+    <!-- Services Section -->
+    <!-- @COMPONENT: ServicesSection [detailed service offerings] -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-poppins font-bold mb-4 text-dark-charcoal">Our <span class="text-construction-orange">Services</span></h2>
+                <div class="section-divider w-24 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive construction and design solutions tailored to bring your vision to life with precision and quality.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- @MAP: services.map(service => ( -->
+                <div class="service-card bg-light-gray p-8 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-construction-orange text-4xl mb-6">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-xl font-poppins font-bold mb-4 text-dark-charcoal">Residential Construction</h3>
+                    <p class="text-gray-600 mb-6">Custom home building with modern design elements, smart home integration, and premium finishes.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Custom Home Design</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Smart Home Integration</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Premium Materials</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-light-gray p-8 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-construction-orange text-4xl mb-6">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-poppins font-bold mb-4 text-dark-charcoal">Commercial Projects</h3>
+                    <p class="text-gray-600 mb-6">Professional commercial construction with focus on functionality, aesthetics, and business requirements.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Office Buildings</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Retail Spaces</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Industrial Facilities</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-light-gray p-8 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-construction-orange text-4xl mb-6">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-poppins font-bold mb-4 text-dark-charcoal">Interior Design</h3>
+                    <p class="text-gray-600 mb-6">Complete interior transformation with contemporary design, premium materials, and attention to detail.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Modern Interiors</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Custom Furniture</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Lighting Design</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-light-gray p-8 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-construction-orange text-4xl mb-6">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-poppins font-bold mb-4 text-dark-charcoal">Renovation & Remodeling</h3>
+                    <p class="text-gray-600 mb-6">Transform existing spaces with modern upgrades, structural improvements, and design enhancements.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Kitchen Remodeling</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Bathroom Upgrades</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Space Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-light-gray p-8 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-construction-orange text-4xl mb-6">
+                        <i class="fas fa-drafting-compass"></i>
+                    </div>
+                    <h3 class="text-xl font-poppins font-bold mb-4 text-dark-charcoal">Architecture & Planning</h3>
+                    <p class="text-gray-600 mb-6">Professional architectural services from concept to completion with 3D visualization and planning.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> 3D Visualization</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Structural Engineering</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Permit Assistance</li>
+                    </ul>
+                </div>
+
+                <div class="service-card bg-light-gray p-8 rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-construction-orange text-4xl mb-6">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="text-xl font-poppins font-bold mb-4 text-dark-charcoal">Green Construction</h3>
+                    <p class="text-gray-600 mb-6">Sustainable building practices with eco-friendly materials and energy-efficient solutions.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Solar Integration</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Eco-friendly Materials</li>
+                        <li class="flex items-center"><i class="fas fa-check text-construction-orange mr-2"></i> Energy Efficiency</li>
+                    </ul>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ServicesSection -->
+
+    <!-- Portfolio Section -->
+    <!-- @COMPONENT: PortfolioSection [image gallery with lightbox] -->
+    <section id="portfolio" class="py-20 bg-light-gray">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-poppins font-bold mb-4 text-dark-charcoal">Our <span class="text-construction-orange">Portfolio</span></h2>
+                <div class="section-divider w-24 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Discover our latest construction projects showcasing modern design, quality craftsmanship, and innovative solutions.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Item 1 - Modern House Exterior -->
+                <div class="portfolio-item group relative overflow-hidden rounded-xl shadow-lg cursor-pointer" data-lightbox="portfolio">
+                    <!-- Modern house exterior with blue LED lighting -->
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMUE0ODY5Ii8+CjxyZWN0IHg9IjUwIiB5PSIxMDAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRkZGRkZGIiBzdHJva2U9IiNFNUU3RUIiIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSIxNzUiIHk9IjEyNSIgd2lkdGg9IjUwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMzc0MTUxIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjE1MCIgcj0iNSIgZmlsbD0iIzAwN0JGRiIvPgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSIxNTAiIHI9IjUiIGZpbGw9IiMwMDdCRkYiLz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNGRkZGRkYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJJbnRlciI+TW9kZXJuIEhvdXNlIEV4dGVyaW9yPC90ZXh0Pgo8L3N2Zz4K" alt="Modern House Exterior with LED Lighting" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" data-mock="true" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-lg font-semibold">Modern House Exterior</h3>
+                            <p class="text-sm opacity-90">Contemporary design with LED lighting</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2 - Interior Room -->
+                <div class="portfolio-item group relative overflow-hidden rounded-xl shadow-lg cursor-pointer" data-lightbox="portfolio">
+                    <!-- Pink interior room with decorative ceiling -->
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjJEN0Q1Ii8+CjxyZWN0IHg9IjUwIiB5PSIyMCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSI4MCIgZmlsbD0iI0ZGRkZGRiIgc3Ryb2tlPSIjRTVFN0VCIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iNjAiIHI9IjE1IiBmaWxsPSIjRkY2QjM1IiBvcGFjaXR5PSIwLjMiLz4KPHJlY3QgeD0iNTAiIHk9IjEyMCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxNjAiIGZpbGw9IiNGMkQ3RDUiLz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjcyODAiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJJbnRlciI+SW50ZXJpb3IgUm9vbSBEZXNpZ248L3RleHQ+Cjwvc3ZnPgo=" alt="Interior Room with Custom Design" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" data-mock="true" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-lg font-semibold">Interior Room Design</h3>
+                            <p class="text-sm opacity-90">Custom ceiling work and modern finish</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3 - Bathroom Design -->
+                <div class="portfolio-item group relative overflow-hidden rounded-xl shadow-lg cursor-pointer" data-lightbox="portfolio">
+                    <!-- Bathroom with mosaic tile work -->
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjhGOUZBIi8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNENkY0RjYiLz4KPGNpcmNsZSBjeD0iMTI1IiBjeT0iMTAwIiByPSI4IiBmaWxsPSIjQzY2OTI2IiBvcGFjaXR5PSIwLjciLz4KPGNpcmNsZSBjeD0iMTUwIiBjeT0iMTMwIiByPSI2IiBmaWxsPSIjQzY2OTI2IiBvcGFjaXR5PSIwLjciLz4KPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTUwIiByPSI3IiBmaWxsPSIjQzY2OTI2IiBvcGFjaXR5PSIwLjciLz4KPHJlY3QgeD0iMjUwIiB5PSIyMDAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI1MCIgZmlsbD0iI0ZGRkZGRiIgc3Ryb2tlPSIjRTVFN0VCIiBzdHJva2Utd2lkdGg9IjIiLz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjcyODAiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJJbnRlciI+QmF0aHJvb20gRGVzaWduPC90ZXh0Pgo8L3N2Zz4K" alt="Bathroom with Mosaic Tile Work" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" data-mock="true" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-lg font-semibold">Bathroom Design</h3>
+                            <p class="text-sm opacity-90">Premium mosaic tile installation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4 - Glass Staircase -->
+                <div class="portfolio-item group relative overflow-hidden rounded-xl shadow-lg cursor-pointer" data-lightbox="portfolio">
+                    <!-- Modern glass staircase with stainless steel railings -->
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjhGOUZBIi8+CjxwYXRoIGQ9Ik01MCAyNTBMMzUwIDEwMCIgc3Ryb2tlPSIjOTA5MDkwIiBzdHJva2Utd2lkdGg9IjMiLz4KPHJlY3QgeD0iMTAwIiB5PSIyMDAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI4IiBmaWxsPSIjRjBGMEYwIiBvcGFjaXR5PSIwLjkiLz4KPHJlY3QgeD0iMTUwIiB5PSIxNzAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI4IiBmaWxsPSIjRjBGMEYwIiBvcGFjaXR5PSIwLjkiLz4KPHJlY3QgeD0iMjAwIiB5PSIxNDAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI4IiBmaWxsPSIjRjBGMEYwIiBvcGFjaXR5PSIwLjkiLz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjcyODAiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJJbnRlciI+R2xhc3MgU3RhaXJjYXNlPC90ZXh0Pgo8L3N2Zz4K" alt="Modern Glass Staircase" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" data-mock="true" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-lg font-semibold">Glass Staircase</h3>
+                            <p class="text-sm opacity-90">Modern stainless steel and glass design</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5 - Kitchen Area -->
+                <div class="portfolio-item group relative overflow-hidden rounded-xl shadow-lg cursor-pointer" data-lightbox="portfolio">
+                    <!-- Kitchen area with arched entrance -->
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkZGRkZGIi8+CjxwYXRoIGQ9Ik0xNTAgNTBBNTAgNTAgMCAwIDEgMjUwIDUwVjI1MEgxNTBWNTBaIiBmaWxsPSIjRjhGOUZBIiBzdHJva2U9IiNFNUU3RUIiIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSI1MCIgeT0iMjAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMUM3RjU2IiBvcGFjaXR5PSIwLjMiLz4KPGNpcmNsZSBjeD0iMzIwIiBjeT0iMTUwIiByPSIxMCIgZmlsbD0iI0ZGNkIzNSIgb3BhY2l0eT0iMC41Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjY3MjgwIiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iSW50ZXIiPktpdGNoZW4gQXJlYTwvdGV4dD4KPC9zdmc+Cg==" alt="Kitchen Area with Arched Design" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" data-mock="true" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-lg font-semibold">Kitchen Design</h3>
+                            <p class="text-sm opacity-90">Arched entrance with modern finishes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 6 - House Exterior Night -->
+                <div class="portfolio-item group relative overflow-hidden rounded-xl shadow-lg cursor-pointer" data-lightbox="portfolio">
+                    <!-- House exterior at night with dramatic lighting -->
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMUEyMDJDIi8+CjxyZWN0IHg9IjUwIiB5PSIxMDAiIHdpZHRoPSIzMDAiIGhlaWdodD0iMTUwIiBmaWxsPSIjRkZGRkZGIiBzdHJva2U9IiNFNUU3RUIiIHN0cm9rZS13aWR0aD0iMiIvPgo8cmVjdCB4PSIxMDAiIHk9IjEyNSIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMzNzQxNTEiIG9wYWNpdHk9IjAuNyIvPgo8Y2lyY2xlIGN4PSIxMDAiIGN5PSI4MCIgcj0iOCIgZmlsbD0iIzAwN0JGRiIvPgo8Y2lyY2xlIGN4PSIxNTAiIGN5PSI4MCIgcj0iOCIgZmlsbD0iIzAwN0JGRiIvPgo8Y2lyY2xlIGN4PSIyNTAiIGN5PSI4MCIgcj0iOCIgZmlsbD0iIzAwN0JGRiIvPgo8Y2lyY2xlIGN4PSIzMDAiIGN5PSI4MCIgcj0iOCIgZmlsbD0iIzAwN0JGRiIvPgo8dGV4dCB4PSIyMDAiIHk9IjI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0ZGRkZGRiIgZm9udC1zaXplPSIxMiIgZm9udC1mYW1pbHk9IkludGVyIj5OaWdodCBFeHRlcmlvcjwvdGV4dD4KPC9zdmc+Cg==" alt="House Exterior Night View" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110" data-mock="true" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-lg font-semibold">Night Exterior</h3>
+                            <p class="text-sm opacity-90">Dramatic LED lighting showcase</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="bg-construction-orange hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                    View All Projects
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: PortfolioSection -->
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <!-- Contact Section -->
+    <!-- @COMPONENT: ContactSection [contact form with validation] -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-poppins font-bold mb-4 text-dark-charcoal">Get In <span class="text-construction-orange">Touch</span></h2>
+                <div class="section-divider w-24 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ready to start your construction project? Contact us today for a free consultation and quote.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-2xl font-poppins font-bold mb-6 text-dark-charcoal">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4" data-mock="true">
+                            <div class="bg-construction-orange text-white p-3 rounded-lg">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark-charcoal">Address</h4>
+                                <p class="text-gray-600" data-bind="company.address">123 Construction Ave, Builder City, BC 12345</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4" data-mock="true">
+                            <div class="bg-construction-orange text-white p-3 rounded-lg">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark-charcoal">Phone</h4>
+                                <p class="text-gray-600" data-bind="company.phone">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4" data-mock="true">
+                            <div class="bg-construction-orange text-white p-3 rounded-lg">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark-charcoal">Email</h4>
+                                <p class="text-gray-600" data-bind="company.email">info@estarra.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4" data-mock="true">
+                            <div class="bg-construction-orange text-white p-3 rounded-lg">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-dark-charcoal">Business Hours</h4>
+                                <p class="text-gray-600" data-bind="company.hours">Mon - Fri: 8:00 AM - 6:00 PM</p>
+                                <p class="text-gray-600">Sat: 9:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-dark-charcoal mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-light-gray hover:bg-construction-orange text-gray-600 hover:text-white p-3 rounded-lg transition-all duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-light-gray hover:bg-construction-orange text-gray-600 hover:text-white p-3 rounded-lg transition-all duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-light-gray hover:bg-construction-orange text-gray-600 hover:text-white p-3 rounded-lg transition-all duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="bg-light-gray hover:bg-construction-orange text-gray-600 hover:text-white p-3 rounded-lg transition-all duration-300">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <!-- @STATE: formData:{name,email,phone,message}, isSubmitting:boolean, showSuccess:boolean -->
+                <div>
+                    <h3 class="text-2xl font-poppins font-bold mb-6 text-dark-charcoal">Send Message</h3>
+                    
+                    <form id="contact-form" class="space-y-6" data-implementation="SMTP integration required">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-dark-charcoal mb-2">Full Name *</label>
+                                <input type="text" id="name" name="name" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-construction-orange focus:border-transparent transition-all duration-300"
+                                       placeholder="Enter your name" data-bind="formData.name">
+                                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-dark-charcoal mb-2">Email Address *</label>
+                                <input type="email" id="email" name="email" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-construction-orange focus:border-transparent transition-all duration-300"
+                                       placeholder="Enter your email" data-bind="formData.email">
+                                <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-dark-charcoal mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-construction-orange focus:border-transparent transition-all duration-300"
+                                   placeholder="Enter your phone number" data-bind="formData.phone">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-dark-charcoal mb-2">Project Details *</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-construction-orange focus:border-transparent transition-all duration-300 resize-none"
+                                      placeholder="Tell us about your project..." data-bind="formData.message"></textarea>
+                            <div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-construction-orange hover:bg-orange-600 text-white py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                                data-event="click:handleSubmit" data-implementation="Should validate form before submission">
+                            <span class="submit-text">Send Message</span>
+                            <span class="loading-text hidden">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>Sending...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center animate-slide-up">
+            <div class="text-construction-orange text-5xl mb-4">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-dark-charcoal mb-4">Message Sent!</h3>
+            <p class="text-gray-600 mb-6">Thank you for your interest. We'll get back to you within 24 hours.</p>
+            <button id="close-modal" class="bg-construction-orange hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition-all duration-300">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark-charcoal text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-poppins font-bold mb-4">
+                        <span class="text-construction-orange">E</span>starra
+                    </div>
+                    <p class="text-gray-400 mb-4">Building dreams into reality with premium construction and innovative design solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-construction-orange transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-construction-orange transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-construction-orange transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div data-mock="true">
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-construction-orange transition-colors duration-300">Residential Construction</a></li>
+                        <li><a href="#" class="hover:text-construction-orange transition-colors duration-300">Commercial Projects</a></li>
+                        <li><a href="#" class="hover:text-construction-orange transition-colors duration-300">Interior Design</a></li>
+                        <li><a href="#" class="hover:text-construction-orange transition-colors duration-300">Renovation</a></li>
+                    </ul>
+                </div>
+                
+                <div data-mock="true">
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#about" class="hover:text-construction-orange transition-colors duration-300">About Us</a></li>
+                        <li><a href="#portfolio" class="hover:text-construction-orange transition-colors duration-300">Portfolio</a></li>
+                        <li><a href="#contact" class="hover:text-construction-orange transition-colors duration-300">Contact</a></li>
+                        <li><a href="#" class="hover:text-construction-orange transition-colors duration-300">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div data-mock="true">
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p data-bind="company.address">123 Construction Ave<br>Builder City, BC 12345</p>
+                        <p data-bind="company.phone">Phone: +1 (555) 123-4567</p>
+                        <p data-bind="company.email">Email: info@estarra.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Estarra Construction. All rights reserved. | Designed with excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            'use strict';
+            
+            // Register GSAP ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Navigation functionality
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('translate-x-full');
+            });
+            
+            // Close mobile menu when clicking nav links
+            mobileNavLinks.forEach(function(link) {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"], [data-scroll-to]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('href') || '#' + this.getAttribute('data-scroll-to');
+                    const element = document.querySelector(target);
+                    if (element) {
+                        element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Navbar background on scroll
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                }
+            });
+            
+            // GSAP Animations
+            function initAnimations() {
+                // Hero animations
+                gsap.from("#hero-title", {
+                    duration: 1,
+                    y: 50,
+                    opacity: 0,
+                    ease: "power3.out"
+                });
+                
+                gsap.from("#hero-subtitle", {
+                    duration: 1,
+                    y: 30,
+                    opacity: 0,
+                    delay: 0.3,
+                    ease: "power3.out"
+                });
+                
+                // Animate service cards on scroll
+                gsap.utils.toArray('.service-card').forEach(function(card, index) {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 90%",
+                            end: "bottom 20%",
+                            toggleActions: "play none none reverse"
+                        },
+                        duration: 0.8,
+                        y: 50,
+                        opacity: 0,
+                        delay: index * 0.1,
+                        ease: "power3.out"
+                    });
+                });
+                
+                // Animate portfolio items
+                gsap.utils.toArray('.portfolio-item').forEach(function(item, index) {
+                    gsap.from(item, {
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 90%",
+                            end: "bottom 20%",
+                            toggleActions: "play none none reverse"
+                        },
+                        duration: 0.8,
+                        y: 50,
+                        opacity: 0,
+                        delay: index * 0.1,
+                        ease: "power3.out"
+                    });
+                });
+            }
+            
+            // Counter animation
+            function animateCounters() {
+                const counters = document.querySelectorAll('[data-counter]');
+                
+                counters.forEach(function(counter) {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const display = counter.querySelector('[data-target]');
+                    
+                    gsap.to(display, {
+                        scrollTrigger: {
+                            trigger: counter,
+                            start: "top 80%",
+                            end: "bottom 20%",
+                            toggleActions: "play none none reverse"
+                        },
+                        duration: 2,
+                        textContent: target,
+                        roundProps: "textContent",
+                        ease: "power2.out"
+                    });
+                });
+            }
+            
+            // Lightbox functionality
+            function initLightbox() {
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                const lightboxClose = document.querySelector('.lightbox-close');
+                const portfolioItems = document.querySelectorAll('.portfolio-item');
+                
+                portfolioItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        const img = this.querySelector('img');
+                        lightboxImg.src = img.src;
+                        lightbox.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+                
+                function closeLightbox() {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+                
+                lightboxClose.addEventListener('click', closeLightbox);
+                lightbox.addEventListener('click', function(e) {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+                
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    }
+                });
+            }
+            
+            // Form handling
+            function initContactForm() {
+                const form = document.getElementById('contact-form');
+                const successModal = document.getElementById('success-modal');
+                const closeModal = document.getElementById('close-modal');
+                
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    
+                    // Clear previous errors
+                    document.querySelectorAll('.error-message').forEach(function(error) {
+                        error.classList.add('hidden');
+                    });
+                    
+                    let hasErrors = false;
+                    
+                    if (!name) {
+                        showError('name', 'Name is required');
+                        hasErrors = true;
+                    }
+                    
+                    if (!email) {
+                        showError('email', 'Email is required');
+                        hasErrors = true;
+                    } else if (!isValidEmail(email)) {
+                        showError('email', 'Please enter a valid email');
+                        hasErrors = true;
+                    }
+                    
+                    if (!message) {
+                        showError('message', 'Message is required');
+                        hasErrors = true;
+                    }
+                    
+                    if (!hasErrors) {
+                        // Show loading state
+                        const submitBtn = form.querySelector('[type="submit"]');
+                        const submitText = submitBtn.querySelector('.submit-text');
+                        const loadingText = submitBtn.querySelector('.loading-text');
+                        
+                        submitBtn.disabled = true;
+                        submitText.classList.add('hidden');
+                        loadingText.classList.remove('hidden');
+                        
+                        // TODO: Implement SMTP email functionality
+                        // Simulate form submission
+                        setTimeout(function() {
+                            // Reset form
+                            form.reset();
+                            
+                            // Reset button state
+                            submitBtn.disabled = false;
+                            submitText.classList.remove('hidden');
+                            loadingText.classList.add('hidden');
+                            
+                            // Show success modal
+                            successModal.classList.remove('hidden');
+                            successModal.classList.add('flex');
+                        }, 2000);
+                    }
+                });
+                
+                function showError(fieldId, message) {
+                    const field = document.getElementById(fieldId);
+                    const errorDiv = field.parentNode.querySelector('.error-message');
+                    errorDiv.textContent = message;
+                    errorDiv.classList.remove('hidden');
+                    field.classList.add('border-red-500');
+                }
+                
+                function isValidEmail(email) {
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                }
+                
+                // Close success modal
+                closeModal.addEventListener('click', function() {
+                    successModal.classList.add('hidden');
+                    successModal.classList.remove('flex');
+                });
+            }
+            
+            // Initialize all functions
+            document.addEventListener('DOMContentLoaded', function() {
+                initAnimations();
+                animateCounters();
+                initLightbox();
+                initContactForm();
+            });
+            
+        })();
+    </script>
+</body>
+</html>

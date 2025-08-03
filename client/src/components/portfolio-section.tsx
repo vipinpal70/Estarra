@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import photo7 from "@assets/photo-7_1754162009581.jpg";
-import photo8 from "@assets/photo-8_1754162009582.jpg";
-import photo9 from "@assets/photo-9_1754162009583.jpg";
-import photo17 from "@assets/photo17_1754162198728.jpg";
-import photo12 from "@assets/photo-12_1754162198723.jpg";
-import photo13 from "@assets/photo-13_1754162198724.jpg";
-import photo14 from "@assets/photo-14_1754162198725.jpg";
-import photo15 from "@assets/photo-15_1754162198726.jpg";
-import photo16 from "@assets/photo-16_1754162198727.jpg";
-import photo17alt from "@assets/photo-17_1754162198728.jpg";
-import photo18 from "@assets/photo-18_1754162198729.jpg";
-import photo19 from "@assets/photo-19_1754162198730.jpg";
-import photo20 from "@assets/photo-20_1754162198732.jpg";
-import photo21 from "@assets/photo-21_1754162198732.jpg";
+import photo7 from "@assets/portfolio-01.jpg";
+import photo8 from "@assets/portfolio-02.jpg";
+import photo9 from "@assets/portfolio-03.jpg";
+import photo17 from "@assets/portfolio-04.jpg";
+import photo12 from "@assets/hero-main.jpg";
+import photo13 from "@assets/portfolio-05.jpg";
+import photo14 from "@assets/portfolio-06.jpg";
+import photo15 from "@assets/portfolio-07.jpg";
+import photo16 from "@assets/portfolio-08.jpg";
+import photo17alt from "@assets/portfolio-09.jpg";
+import photo18 from "@assets/portfolio-10.jpg";
+import photo19 from "@assets/portfolio-11.jpg";
+import photo20 from "@assets/portfolio-12.jpg";
+import photo21 from "@assets/portfolio-13.jpg";
 
 const portfolioItems = [
   {

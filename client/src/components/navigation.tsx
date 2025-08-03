@@ -1,20 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import homeIcon from "@assets/photo-12_1754162198723.jpg";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -27,9 +16,8 @@ export default function Navigation() {
   return (
     <>
       <nav 
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? 'bg-dark-charcoal/95 backdrop-blur-lg' : 'glass-effect'
-        }`}
+        className="fixed top-0 w-full z-50 shadow-md bg-dark-charcoal"
+        style={{color: 'white'}} 
         data-navbar
         data-testid="navigation"
       >
@@ -38,14 +26,12 @@ export default function Navigation() {
             <div className="text-2xl font-poppins font-bold text-white">
               <span className="text-construction-orange">E</span>starra
             </div>
-            
             <div className="hidden md:flex space-x-8">
               <button 
                 onClick={() => scrollToSection('home')}
                 className="flex items-center space-x-2 text-white hover:text-construction-orange transition-colors duration-300"
                 data-testid="nav-home"
               >
-                <img src={homeIcon} alt="Home" className="w-6 h-6 rounded-full object-cover" />
                 <span>Home</span>
               </button>
               <button 
@@ -110,8 +96,7 @@ export default function Navigation() {
             className="flex items-center space-x-2 text-white text-xl hover:text-construction-orange transition-colors duration-300"
             data-testid="mobile-nav-home"
           >
-            <img src={homeIcon} alt="Home" className="w-6 h-6 rounded-full object-cover" />
-            <span>Home</span>
+            Home
           </button>
           <button 
             onClick={() => scrollToSection('about')}

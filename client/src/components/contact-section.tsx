@@ -80,7 +80,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-dark-charcoal">Address</h4>
-                  <p className="text-gray-600">123 Construction Ave, Builder City, BC 12345</p>
+                  <p className="text-gray-600">Buddheshwar Near Dubagga Lucknow - 226003</p>
                 </div>
               </div>
 
@@ -90,7 +90,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-dark-charcoal">Phone</h4>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                  <p className="text-gray-600">+91 7392861099</p>
                 </div>
               </div>
 
@@ -100,18 +100,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-dark-charcoal">Email</h4>
-                  <p className="text-gray-600">info@estarra.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-4">
-                <div className="bg-construction-orange text-white p-3 rounded-lg">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-dark-charcoal">Business Hours</h4>
-                  <p className="text-gray-600">Mon - Fri: 8:00 AM - 6:00 PM</p>
-                  <p className="text-gray-600">Sat: 9:00 AM - 4:00 PM</p>
+                  <p className="text-gray-600">estarrabuilding@gmail.com</p>
                 </div>
               </div>
             </div>

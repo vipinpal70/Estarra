@@ -17,38 +17,38 @@ export const initScrollAnimations = () => {
 
   // Hero animations
   gsap.from("[data-hero-title]", {
-    duration: 1,
-    y: 50,
+    duration: 0.6,
+    y: 30,
     opacity: 0,
-    ease: "power3.out"
+    ease: "power2.out"
   });
   
   gsap.from("[data-hero-subtitle]", {
-    duration: 1,
-    y: 30,
+    duration: 0.6,
+    y: 20,
     opacity: 0,
-    delay: 0.3,
-    ease: "power3.out"
+    delay: 0.1,
+    ease: "power2.out"
   });
 
-  // Animate elements on scroll
+  // Animate elements on scroll - faster and more responsive
   gsap.utils.toArray('[data-animate]').forEach((element: any, index: number) => {
     gsap.from(element, {
       scrollTrigger: {
         trigger: element,
-        start: "top 90%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
+        start: "top 95%",  // Start animation sooner
+        end: "bottom 30%",
+        toggleActions: "play none none none"  // Don't reverse animations
       },
-      duration: 0.8,
-      y: 50,
+      duration: 0.5,  // Faster animation
+      y: 30,  // Less movement for quicker animation
       opacity: 0,
-      delay: index * 0.1,
-      ease: "power3.out"
+      delay: Math.min(index * 0.05, 0.2),  // Much shorter delays between elements
+      ease: "power2.out"  // Smoother easing
     });
   });
 
-  // Counter animations
+  // Counter animations - faster and more responsive
   const counters = document.querySelectorAll('[data-counter]');
   counters.forEach((counter: Element) => {
     const target = parseInt(counter.getAttribute('data-target') || '0');
@@ -58,14 +58,14 @@ export const initScrollAnimations = () => {
       gsap.to(display, {
         scrollTrigger: {
           trigger: counter,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
+          start: "top 90%",  // Start animation sooner
+          end: "bottom 30%",
+          toggleActions: "play none none none"  // Don't reverse animations
         },
-        duration: 2,
+        duration: 1.2,  // Faster animation (but not too fast for counters)
         textContent: target,
         roundProps: "textContent",
-        ease: "power2.out"
+        ease: "power1.out"  // Smoother, faster easing
       });
     }
   });
@@ -79,16 +79,16 @@ export const initNavbarAnimation = () => {
   const navbar = document.querySelector('[data-navbar]') as HTMLElement;
   if (!navbar) return;
 
+  // Set dark background immediately
+  navbar.style.background = 'rgb(26, 26, 26)';
+  navbar.style.backdropFilter = 'blur(10px)';
+  
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
     
-    if (currentScrollY > 100) {
-      navbar.style.background = 'rgba(26, 26, 26, 0.95)';
-      navbar.style.backdropFilter = 'blur(10px)';
-    } else {
-      navbar.style.background = 'rgba(255, 255, 255, 0.1)';
-      navbar.style.backdropFilter = 'blur(10px)';
-    }
+    // Always maintain dark background regardless of scroll position
+    navbar.style.background = 'rgb(26, 26, 26)';
+    navbar.style.backdropFilter = 'blur(10px)';
     
     lastScrollY = currentScrollY;
   });

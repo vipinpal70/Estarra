@@ -56,15 +56,15 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
             <div className="space-y-2 text-gray-400">
-              <p>123 Construction Ave<br />Builder City, BC 12345</p>
-              <p>Phone: +1 (555) 123-4567</p>
-              <p>Email: info@estarra.com</p>
+              <p>Buddheshwar Near Dubagga<br />Lucknow - 226003</p>
+              <p>Phone: +91 7392861099</p>
+              <p>Email: estarrabuilding@gmail.com</p>
             </div>
           </div>
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Estarra Construction. All rights reserved. | Designed with excellence.</p>
+          <p>&copy; 2025 Estarra Building. All rights reserved. | Designed with excellence.</p>
         </div>
       </div>
     </footer>

@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import photo22 from "@assets/photo-22_1754162269169.jpg";
-import photo23 from "@assets/photo-23_1754162269171.jpg";
-import photo24 from "@assets/photo-24_1754162269172.jpg";
-import photo25 from "@assets/photo-25_1754162269173.jpg";
-import photo26 from "@assets/photo-26_1754162269173.jpg";
-import photo27 from "@assets/photo-27_1754162269174.jpg";
-import photo28 from "@assets/photo-28_1754162269174.jpg";
-import photo29 from "@assets/photo-29_1754162269175.jpg";
-import photo30 from "@assets/photo-30_1754162269175.jpg";
-import photo31 from "@assets/photo-31_1754162269176.jpg";
-import photo32 from "@assets/photo-32_1754162269176.jpg";
+import photo22 from "@assets/gallery-01.jpg";
+import photo23 from "@assets/gallery-02.jpg";
+import photo24 from "@assets/gallery-03.jpg";
+import photo25 from "@assets/gallery-04.jpg";
+import photo26 from "@assets/gallery-05.jpg";
+import photo27 from "@assets/gallery-06.jpg";
+import photo28 from "@assets/gallery-07.jpg";
+import photo29 from "@assets/gallery-08.jpg";
+import photo30 from "@assets/gallery-09.jpg";
+import photo31 from "@assets/gallery-10.jpg";
+import photo32 from "@assets/gallery-11.jpg";
 
 const galleryItems = [
   {
