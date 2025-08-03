@@ -1,6 +1,6 @@
 [build]
   base = "."
-  publish = "dist"
+  publish = "dist/public"
   command = "vite build"
   functions = "netlify/functions"
 
